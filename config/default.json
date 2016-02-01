@@ -1,0 +1,10 @@
+{
+    "port": 4250,
+    "db": {
+        "url": "mongodb://localhost/carparker"
+    },
+
+    "worker": {
+        "exit_timeout": 2000
+    }
+}

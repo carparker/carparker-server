@@ -1,0 +1,35 @@
+{
+  "name": "carparker-server",
+  "version": "0.0.1",
+  "description": "Server for CarParker app",
+  "license": "UNLICENSED",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "debug": "env DEBUG=* node server.js",
+    "pretest": "eslint .",
+    "test": "NODE_ENV=test istanbul cover ./node_modules/mocha/bin/_mocha -- -b --recursive"
+  },
+  "engines": {
+    "node": "5.5.0",
+    "npm": "3.3.12"
+  },
+  "homepage": "https://bitbucket.org/carparkerapp/carparker-server",
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:carparkerapp/carparker-server.git"
+  },
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "config": "^1.19.0",
+    "express": "^4.13.4"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "eslint": "^1.10.3",
+    "eslint-config-cp": "github:transcovo/eslint-config-cp#1.0.3",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.3.4"
+  }
+}

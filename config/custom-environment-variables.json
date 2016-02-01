@@ -1,0 +1,9 @@
+{
+    "port": "PORT",
+    "db": {
+        "url": "MONGO_URL"
+    },
+    "worker": {
+        "exit_timeout": "WORKER_EXIT_TIMEOUT"
+    }
+}
