@@ -1,15 +1,17 @@
 'use strict';
 
+if (process.env.NEW_RELIC_LICENSE_KEY) require('newrelic');
+
 const express = require('express');
+const logger = require('./modules').logger;
 
 const server = express();
 
 require('./routes').config(server);
 
-/* TODO:
- * setup mongo
- * then listen on server
- */
-const listener = server.listen(server.get('port'), () => {
-  console.log(`Server started on port ${listener.address().port} in ${process.env.NODE_ENV} environment`);
-});
+require('./modules').mongoose.connect()
+  .then(() => {
+    const listener = server.listen(server.get('port'), () => {
+      logger.info(`Server started on port ${listener.address().port} in ${process.env.NODE_ENV} environment`);
+    });
+  });

@@ -1,10 +1,19 @@
 {
-    "port": 4250,
-    "db": {
-        "url": "mongodb://localhost/carparker"
-    },
+  "port": 4250,
+  "db": {
+    "url": "mongodb://localhost/carparker"
+  },
 
-    "worker": {
-        "exit_timeout": 2000
-    }
+  "worker": {
+    "exit_timeout": 2000
+  },
+
+  "log": {
+    "level": "info"
+  },
+  "newrelic": {
+    "key": "",
+    "log": "stdout",
+    "home": "config"
+  }
 }

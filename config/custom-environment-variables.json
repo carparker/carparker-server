@@ -1,9 +1,17 @@
 {
-    "port": "PORT",
-    "db": {
-        "url": "MONGO_URL"
-    },
-    "worker": {
-        "exit_timeout": "WORKER_EXIT_TIMEOUT"
-    }
+  "port": "PORT",
+  "db": {
+    "url": "MONGO_URL"
+  },
+  "worker": {
+    "exit_timeout": "WORKER_EXIT_TIMEOUT"
+  },
+  "log": {
+    "level": "LOG_LEVEL"
+  },
+  "newrelic": {
+    "key": "NEW_RELIC_LICENSE_KEY",
+    "log": "NEW_RELIC_LOG",
+    "home": "NEW_RELIC_HOME"
+  }
 }

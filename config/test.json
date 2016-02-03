@@ -1,5 +1,8 @@
 {
-    "db": {
-        "url": "mongodb://localhost/carparker-test"
-    }
+  "db": {
+    "url": "mongodb://localhost/carparker-test"
+  },
+  "log": {
+    "level": "debug"
+  }
 }
