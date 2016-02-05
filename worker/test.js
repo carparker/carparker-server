@@ -1,14 +1,16 @@
 'use strict';
 
 const CronJob = require('cron').CronJob;
+const logger = require('../modules').logger;
 
 function runTest() {
-  console.log('[WORKER.test] Triggered');
+  logger.info('[WORKER.test] Triggered');
 }
 
 module.exports = {
   start: () => {
-    console.log('[WORKER.test] Starting');
+    logger.info('[WORKER.test] Starting');
+    /* eslint no-new: 0 */
     new CronJob('00 00 00 * * *', runTest, null, true, 'Europe/Paris');
   }
 };

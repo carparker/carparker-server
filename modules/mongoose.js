@@ -1,6 +1,6 @@
 'use strict';
 
-var _ = require('lodash');
+const _ = require('lodash');
 const config = require('config');
 const mongoose = require('mongoose');
 const logger = require('./logger');
