@@ -1,36 +1,31 @@
-var mongoose = require('mongoose');
-var mongooseHidden = require('mongoose-hidden')();
+'use strict';
 
-var LocationSchema = new mongoose.Schema({
+const mongoose = require('mongoose');
+const mongooseHidden = require('mongoose-hidden')();
+const Schema = mongoose.Schema;
+
+const CarParkSchema = new Schema({
+  name: { type: String, required: true },
+  location: {
     address: String,
+    postcode: String,
     city: String,
     country: String,
-    coordinates: {type: Number, index: '2dsphere'}   
+    coordinates: { type: [Number], index: '2dsphere' }
+  },
+
+  price: [{
+    duration: Number,
+    price: Number
+  }],
+  ranking: Number,
+
+  last_update: { type: Date, required: true }
 });
 
-var CostsSchema = new mongoose.Schema({
-    time_in_m: Number,
-    cost: Number
-});
+// TODO: complete that depending on the db queries
+// CarParkSchema.index({});
 
-var TagSchema = new mongoose.Schema({
-    name: String
-});
+CarParkSchema.plugin(mongooseHidden);
 
-var CarParkSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-
-    location: {
-	LocationSchema
-    },
-
-    costs: {
-	[CostsSchema]
-    },
-
-    tags: {
-	[TagSchema]
-    }
-
-    last_update: { type: Date, required: true },
-});
+module.exports = CarParkSchema;

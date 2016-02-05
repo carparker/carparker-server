@@ -1,5 +1,7 @@
-var mongoose = require('mongoose');
+'use strict';
 
-var CarParkModel = mongoose.model('car_parks', require('./schema'));
+const mongoose = require('mongoose');
 
-module.exports.CarParkModel = CarParkModel;
+const CarParkModel = mongoose.model('car_parks', require('./schema'));
+
+module.exports = CarParkModel;

@@ -1,5 +1,5 @@
-var CarPark = require('./car_park');
+'use strict';
 
-module.exports = {
-    CarParkModel: CarPark.CarParkModel
-};
+const CarPark = require('./car_park');
+
+module.exports = { CarPark };
