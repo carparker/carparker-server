@@ -14,11 +14,12 @@ const CarParkSchema = new Schema({
     coordinates: { type: [Number], index: '2dsphere' }
   },
 
-  price: [{
+  prices: [{
     duration: Number,
     price: Number
   }],
-  ranking: Number,
+
+  ranking: { type: Number, min: 0, max, 2 },
 
   last_update: { type: Date, required: true }
 });
