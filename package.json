@@ -28,7 +28,8 @@
     "cron": "^1.1.0",
     "express": "^4.13.4",
     "lodash": "^4.2.1",
-    "mongoose": "^4.4.0",
+    "mongoose": "^4.4.1",
+    "mongoose-hidden": "^0.5.2",
     "newrelic": "^1.25.1"
   },
   "devDependencies": {
