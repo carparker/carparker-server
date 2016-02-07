@@ -29,15 +29,15 @@
     "cron": "^1.1.0",
     "express": "^4.13.4",
     "lodash": "^4.2.1",
-    "mongoose": "^4.4.1",
-    "mongoose-hidden": "^0.5.2",
+    "mongoose": "^4.4.2",
+    "mongoose-hidden": "^0.6.0",
     "newrelic": "^1.25.1",
     "superagent": "^1.7.2"
   },
   "devDependencies": {
     "chai": "^3.4.1",
     "eslint": "^1.10.3",
-    "eslint-config-cp": "github:transcovo/eslint-config-cp#1.0.3",
+    "eslint-config-cp": "github:transcovo/eslint-config-cp#1.1.0",
     "istanbul": "^0.4.2",
     "mocha": "^2.3.4"
   }
