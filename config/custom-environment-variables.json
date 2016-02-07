@@ -4,6 +4,9 @@
     "url": "MONGO_URL"
   },
   "worker": {
+    "opendata": {
+      "timeout": "OPENDATA_REQUEST_TIMEOUT"
+    },
     "exit_timeout": "WORKER_EXIT_TIMEOUT"
   },
   "log": {

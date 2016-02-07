@@ -5,6 +5,9 @@
   },
 
   "worker": {
+    "opendata": {
+      "timeout": 30000
+    },
     "exit_timeout": 2000
   },
 

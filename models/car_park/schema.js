@@ -19,7 +19,7 @@ const CarParkSchema = new Schema({
     price: Number
   }],
 
-  ranking: { type: Number, min: 0, max, 2 },
+  ranking: { type: Number, min: 0, max: 2 },
 
   last_update: { type: Date, required: true }
 });

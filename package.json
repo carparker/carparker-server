@@ -21,16 +21,18 @@
     "url": "git@bitbucket.org:carparkerapp/carparker-server.git"
   },
   "dependencies": {
-    "bluebird": "^3.2.1",
+    "bluebird": "^3.2.2",
     "body-parser": "^1.14.2",
     "bunyan": "^1.5.1",
+    "co": "^4.6.0",
     "config": "^1.19.0",
     "cron": "^1.1.0",
     "express": "^4.13.4",
     "lodash": "^4.2.1",
     "mongoose": "^4.4.1",
     "mongoose-hidden": "^0.5.2",
-    "newrelic": "^1.25.1"
+    "newrelic": "^1.25.1",
+    "superagent": "^1.7.2"
   },
   "devDependencies": {
     "chai": "^3.4.1",
