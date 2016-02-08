@@ -14,12 +14,16 @@ const CarParkSchema = new Schema({
     coordinates: { type: [Number], index: '2dsphere' }
   },
 
+  open_hours: {
+    open: { type: Number, min: 0, max: 1440 },
+    close: { type: Number, min: 0, max: 1440 }
+  },
+
   prices: [{
     duration: Number,
-    price: Number
+    price: Number,
+    ranking: { type: Number, min: 0, max: 2 }
   }],
-
-  ranking: { type: Number, min: 0, max: 2 },
 
   last_update: { type: Date, required: true }
 });

@@ -1,20 +1,22 @@
 'use strict';
 
+const _ = require('lodash');
 const co = require('co');
 const config = require('config');
 const CronJob = require('cron').CronJob;
 const superagent = require('superagent');
 const Promise = require('bluebird');
 const logger = require('../../modules').logger;
-// const CarPark = require('../../models').CarPark;
+const parkUpdater = require('./park_updater');
+
+const mapper = require('./mapping/paris.js');
 
 Promise.promisifyAll(superagent.Request.prototype);
 
 function* _update() {
-  logger.info('[WORKER.opendata.paris] Starting');
+  logger.info('[WORKER.opendata.paris] Triggered');
 
-  // const data = yield superagent.get('http://opendata.paris.fr/api/records/1.0/search/?dataset=parcs-de-stationnement-concedes-de-la-ville-de-paris&facet=arrdt&facet=delegataire&facet=type_de_parc&facet=horaires_ouvertures_pour_les_usagers_non_abonnes&facet=ascenseur_debouchant_en_surface&facet=acces_motos&facet=acces_velos&facet=station_autopartage')
-  const data = yield superagent.get('http://opendata.paris.fr/api/records/1.0/search/?dataset=parcs-de-stationnement-concedes-de-la-ville-de-paris&facet=arrdt&facet=delegataire&facet=type_de_parc&refine.type_de_parc=Mixte')
+  const data = yield superagent.get('http://opendata.paris.fr/api/records/1.0/search/?dataset=parcs-de-stationnement-concedes-de-la-ville-de-paris&rows=10000&facet=arrdt&facet=delegataire&facet=type_de_parc&refine.type_de_parc=Mixte')
           .timeout(config.worker.opendata.timeout)
           .send()
           .endAsync();
@@ -23,23 +25,37 @@ function* _update() {
     return logger.error({ data }, '[WORKER.opendata.paris] Invalid data');
   }
 
-  logger.info({ data: JSON.parse(data.text) }, `[WORKER.opendata.paris] received data`);
   try {
-    const res = JSON.parse(data.text);
+    const body = JSON.parse(data.text);
 
-    if (!res || !res.nhits || !res.records) {
-      return logger.warn();            // TODO
+    logger.debug({ body }, `[WORKER.opendata.paris] received data`);
+    if (!body || !body.nhits || !body.records) {
+      return logger.warn({ data, body }, '[WORKER.opendata.paris] Invalid resilt from data');
     }
 
-    res.records.forEach((park) => {
-      logger.debug({ park }, 'Adding parking to database');
-      // TODO: Map data
+    const parks = [];
+
+    body.records.forEach((park) => {
+      const newpark = mapper(park.fields);
+      logger.info({ parking: newpark }, 'PARKING');
+      parks.push(newpark);
     });
+
+    // TODO: apply ranking on prices
+    for (const park of parks) {
+      _.map(park.prices, price => {
+        price.ranking = 0;
+        return price;
+      });
+    }
+
+    logger.info({ parkings: parks }, '[WORKER.opendata.paris] Updating parkings');
+    yield parkUpdater(parks);
   } catch (err) {
-    return logger.warn({ err }, '[WORKER.opendata.paris] Error processing data');
+    logger.warn({ err }, '[WORKER.opendata.paris] Error processing data');
   }
 
-  logger.info('[WORKER.opendata.paris] Ended');
+  return logger.info('[WORKER.opendata.paris] Ended');
 }
 
 module.exports = {

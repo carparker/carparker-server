@@ -1,0 +1,16 @@
+{
+  "tarif_1_4_heure": 15,
+  "tarif_1_2_heure": 30,
+  "tarif_1_heure": 60,
+  "tarif_1_5_h": 90,
+  "tarif_2h": 120,
+  "tarif_3h": 180,
+  "tarif_4h": 240,
+  "tarif_7h": 420,
+  "tarif_8h": 480,
+  "tarif_9h": 540,
+  "tarif_10h": 600,
+  "tarif_11h": 660,
+  "tarif_12h": 720,
+  "tarif_24h": 1440
+}
