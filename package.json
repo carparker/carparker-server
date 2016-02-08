@@ -37,7 +37,7 @@
   "devDependencies": {
     "chai": "^3.4.1",
     "eslint": "^1.10.3",
-    "eslint-config-cp": "github:transcovo/eslint-config-cp#1.1.0",
+    "eslint-config-cp": "^1.1.0",
     "istanbul": "^0.4.2",
     "mocha": "^2.3.4"
   }

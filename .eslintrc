@@ -1,3 +1,6 @@
 {
-    "extends": "cp"
+    "extends": "cp",
+    "rules": {
+        "require-jsdoc": 0
+    }
 }
