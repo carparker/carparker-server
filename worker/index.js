@@ -3,5 +3,8 @@
 const test = require('./test');
 const opendata = require('./opendata');
 
-test.start();
-opendata.start();
+require('../modules').mongoose.connect()
+  .then(() => {
+    test.start();
+    opendata.start();
+  });
