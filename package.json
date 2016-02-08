@@ -9,7 +9,7 @@
     "start": "node server.js",
     "debug": "env DEBUG=* node server.js",
     "pretest": "eslint .",
-    "test": "NODE_ENV=test istanbul cover ./node_modules/mocha/bin/_mocha -- -b --recursive"
+    "test": "NODE_ENV=test istanbul cover _mocha --include-all-sources -- -b --recursive --require co-mocha"
   },
   "engines": {
     "node": "5.5.0",
@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "chai": "^3.4.1",
+    "co-mocha": "^1.1.2",
     "eslint": "^1.10.3",
     "eslint-config-cp": "^1.1.0",
     "istanbul": "^0.4.2",
