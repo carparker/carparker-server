@@ -9,7 +9,7 @@
     "start": "node server.js",
     "debug": "env DEBUG=* node server.js",
     "pretest": "eslint .",
-    "test": "NODE_ENV=test istanbul cover _mocha --include-all-sources -- -b --recursive --require co-mocha"
+    "test": "NODE_ENV=test istanbul cover _mocha --include-all-sources -x \"**/tool/**\" -x \"**/test/**\" -- -b --recursive --require co-mocha"
   },
   "engines": {
     "node": "5.5.0",
@@ -27,6 +27,7 @@
     "co": "^4.6.0",
     "config": "^1.19.0",
     "cron": "^1.1.0",
+    "eslint-config-airbnb": "^5.0.0",
     "express": "^4.13.4",
     "http-status-codes": "^1.0.6",
     "joi": "^7.2.3",

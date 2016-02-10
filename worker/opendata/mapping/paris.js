@@ -6,11 +6,13 @@ const logger = require('../../../modules').logger;
 const priceMap = require('./paris.json');
 
 module.exports = (park) => {
+  const arrdt = `0${park.arrdt}`.slice(-2);
+
   const parkData = {
     name: park.nom_du_parc_de_stationnement,
     location: {
       address: park.adresse,
-      postcode: '750' + ('0' + park.arrdt).slice(-2),
+      postcode: `750${arrdt}`,
       city: 'Paris',
       country: 'France'
     },
@@ -30,7 +32,6 @@ module.exports = (park) => {
 
   for (const price in priceMap) {
     if (park[price]) {
-      logger.debug({ field: price, price: park[price], sliced: park[price].slice(0, -2).replace(',', '.') }, 'Adding price');
       parkData.prices.push({
         duration: priceMap[price],
         price: parseFloat(park[price].slice(0, -2).replace(',', '.'))
