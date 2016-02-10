@@ -16,7 +16,7 @@ Promise.promisifyAll(superagent.Request.prototype);
 function* _update() {
   logger.info('[WORKER.opendata.paris] Triggered');
 
-  const data = yield superagent.get(config.opendata.paris.url)
+  const data = yield superagent.get(config.worker.opendata.paris.url)
           .timeout(config.worker.opendata.timeout)
           .send()
           .endAsync();
