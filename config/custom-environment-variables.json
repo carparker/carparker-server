@@ -19,5 +19,12 @@
     "key": "NEW_RELIC_LICENSE_KEY",
     "log": "NEW_RELIC_LOG",
     "home": "NEW_RELIC_HOME"
+  },
+  "rollbar": {
+    "url": "ROLLBAR_ENDPOINT",
+    "token": "ROLLBAR_ACCESS_TOKEN",
+    "environment": "HEROKU_APP_NAME",
+    "version": "HEROKU_SLUG_COMMIT",
+    "enabled": "ROLLBAR_ENABLED"
   }
 }

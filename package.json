@@ -35,6 +35,7 @@
     "mongoose": "^4.4.3",
     "mongoose-hidden": "^0.6.1",
     "newrelic": "^1.25.1",
+    "rollbar": "^0.5.12",
     "superagent": "^1.7.2"
   },
   "devDependencies": {

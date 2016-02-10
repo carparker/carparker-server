@@ -5,6 +5,9 @@ if (process.env.NEW_RELIC_LICENSE_KEY) require('newrelic');
 const express = require('express');
 const logger = require('./modules').logger;
 
+const rollbarHelper = require('./modules').rollbarHelper;
+rollbarHelper.init();
+
 const server = express();
 
 require('./routes').config(server);
