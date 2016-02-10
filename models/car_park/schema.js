@@ -25,7 +25,8 @@ const CarParkSchema = new Schema({
     ranking: { type: Number, min: 0, max: 2 }
   }],
 
-  last_update: { type: Date, required: true }
+  last_update: { type: Date, required: true },
+  outdated: { type: Boolean, default: false }
 });
 
 // TODO: complete that depending on the db queries

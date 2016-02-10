@@ -20,7 +20,8 @@ module.exports = (park) => {
 
     prices: [],
 
-    last_update: new Date()
+    last_update: new Date(),
+    outdated: false
   };
 
   if (_.isArray(park.xy) && park.xy.length === 2) {
