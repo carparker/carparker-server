@@ -1,16 +1,48 @@
 {
-  "tarif_1_4_heure": 15,
-  "tarif_1_2_heure": 30,
-  "tarif_1_heure": 60,
-  "tarif_1_5_h": 90,
-  "tarif_2h": 120,
-  "tarif_3h": 180,
-  "tarif_4h": 240,
-  "tarif_7h": 420,
-  "tarif_8h": 480,
-  "tarif_9h": 540,
-  "tarif_10h": 600,
-  "tarif_11h": 660,
-  "tarif_12h": 720,
-  "tarif_24h": 1440
+  "price": {
+    "tarif_1_4_heure": 15,
+    "tarif_1_2_heure": 30,
+    "tarif_1_heure": 60,
+    "tarif_1_5_h": 90,
+    "tarif_2h": 120,
+    "tarif_3h": 180,
+    "tarif_4h": 240,
+    "tarif_7h": 420,
+    "tarif_8h": 480,
+    "tarif_9h": 540,
+    "tarif_10h": 600,
+    "tarif_11h": 660,
+    "tarif_12h": 720,
+    "tarif_24h": 1440
+  },
+  "opening": {
+    "24h / 24": {
+      "open": 0,
+      "close": 1440
+    },
+    "07h / 23h": {
+      "open": 420,
+      "close": 1380
+    },
+    "06h / 20h": {
+      "open": 360,
+      "close": 1200
+    },
+    "7h15 / 22h": {
+      "open": 435,
+      "close": 1320
+    },
+    "8h / 19h30": {
+      "open": 480,
+      "close": 1170
+    },
+    "8h / 20h": {
+      "open": 480,
+      "close": 1200
+    },
+    "8h / 22h45": {
+      "open": 480,
+      "close": 1365
+    }
+  }
 }

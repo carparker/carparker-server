@@ -2,7 +2,7 @@
 
 const _ = require('lodash');
 
-const priceMap = require('./paris.json');
+const fieldMap = require('./paris.json');
 
 module.exports = (park) => {
   const arrdt = `0${park.arrdt}`.slice(-2);
@@ -16,9 +16,7 @@ module.exports = (park) => {
       country: 'France'
     },
 
-    // TODO: map opening hours
-    //  -> update mapping json like: `{ 24h/24: { open: 0, close: 1440 } }`
-    // park.horaires_ouvertures_pour_les_usagers_non_abonnes
+    open_hours: { open: 0, close: 1440 },
 
     prices: [],
 
@@ -29,10 +27,12 @@ module.exports = (park) => {
     parkData.location.coordinates = [park.xy[1], park.xy[0]];
   }
 
-  for (const price in priceMap) {
+  parkData.open_hours = fieldMap.opening[park.horaires_ouvertures_pour_les_usagers_non_abonnes] || parkData.open_hours;
+
+  for (const price in fieldMap.price) {
     if (park[price]) {
       parkData.prices.push({
-        duration: priceMap[price],
+        duration: fieldMap.price[price],
         price: parseFloat(park[price].slice(0, -2).replace(',', '.'))
       });
     }
