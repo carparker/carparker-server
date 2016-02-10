@@ -2,6 +2,6 @@
 
 module.exports = {
   logger: require('./logger.js'),
-  mongoose: require('./mongoose.js'),
+  mongooseHelper: require('./mongoose.helper.js'),
   rollbarHelper: require('./rollbar.helper.js')
 };

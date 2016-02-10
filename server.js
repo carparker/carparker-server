@@ -12,7 +12,7 @@ const server = express();
 
 require('./routes').config(server);
 
-require('./modules').mongoose.connect()
+require('./modules').mongooseHelper.connect()
   .then(() => {
     const listener = server.listen(server.get('port'), () => {
       logger.info(`Server started on port ${listener.address().port} in ${process.env.NODE_ENV} environment`);

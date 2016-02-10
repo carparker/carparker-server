@@ -2,7 +2,7 @@
 
 const opendata = require('./opendata');
 
-require('../modules').mongoose.connect()
+require('../modules').mongooseHelper.connect()
   .then(() => {
     opendata.start();
   });
