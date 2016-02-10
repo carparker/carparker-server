@@ -1,7 +1,6 @@
 'use strict';
 
 const _ = require('lodash');
-const logger = require('../../../modules').logger;
 
 const priceMap = require('./paris.json');
 

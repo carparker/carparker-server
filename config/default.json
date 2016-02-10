@@ -6,7 +6,10 @@
 
   "worker": {
     "opendata": {
-      "timeout": 30000
+      "timeout": 30000,
+      "paris": {
+        "url": "http://opendata.paris.fr/api/records/1.0/search/?dataset=parcs-de-stationnement-concedes-de-la-ville-de-paris&rows=10000&facet=arrdt&facet=delegataire&facet=type_de_parc&refine.type_de_parc=Mixte"
+      }
     },
     "exit_timeout": 2000
   },

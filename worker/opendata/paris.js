@@ -16,7 +16,7 @@ Promise.promisifyAll(superagent.Request.prototype);
 function* _update() {
   logger.info('[WORKER.opendata.paris] Triggered');
 
-  const data = yield superagent.get('http://opendata.paris.fr/api/records/1.0/search/?dataset=parcs-de-stationnement-concedes-de-la-ville-de-paris&rows=10000&facet=arrdt&facet=delegataire&facet=type_de_parc&refine.type_de_parc=Mixte')
+  const data = yield superagent.get(config.opendata.paris.url)
           .timeout(config.worker.opendata.timeout)
           .send()
           .endAsync();

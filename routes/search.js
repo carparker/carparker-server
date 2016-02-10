@@ -6,24 +6,6 @@ const logger = require('../modules').logger;
 
 const searchSchema = require('./schema').search;
 
-/**
-{
-  position: {
-    latitude: Number,
-    longitude: Number
-  },
-  address: String,
-  radius: Number,
-  price: {
-    min: Number,
-    max: Number
-  },
-  duration: {
-    min: Number
-  }
-}
- */
-
 function search(req, res, next) {
   const validation = Joi.validate(req.body, searchSchema);
   logger.debug({ body: req.body, validation }, '[SERVER.routes.search] Body validation');

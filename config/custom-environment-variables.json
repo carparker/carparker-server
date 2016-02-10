@@ -5,7 +5,10 @@
   },
   "worker": {
     "opendata": {
-      "timeout": "OPENDATA_REQUEST_TIMEOUT"
+      "timeout": "OPENDATA_REQUEST_TIMEOUT",
+      "paris": {
+        "url": "OPENDATA_PARIS_URL"
+      }
     },
     "exit_timeout": "WORKER_EXIT_TIMEOUT"
   },
