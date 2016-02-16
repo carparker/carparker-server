@@ -32,6 +32,7 @@
     "http-status-codes": "^1.0.6",
     "joi": "^7.2.3",
     "lodash": "^4.3.0",
+    "moment": "^2.11.2",
     "mongoose": "^4.4.3",
     "mongoose-hidden": "^0.6.1",
     "newrelic": "^1.25.1",

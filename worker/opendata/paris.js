@@ -8,6 +8,7 @@ const superagent = require('superagent');
 const Promise = require('bluebird');
 const logger = require('../../modules').logger;
 const parkUpdater = require('./park_updater');
+const rollbarHelper = require('../../modules').rollbarHelper;
 
 const mapper = require('./mapping/paris.js');
 
@@ -52,7 +53,8 @@ function* _update() {
     logger.info({ parkings: parks }, '[WORKER.opendata.paris] Updating parkings');
     yield parkUpdater(parks);
   } catch (err) {
-    logger.warn({ err }, '[WORKER.opendata.paris] Error processing data');
+    logger.error(err, '[WORKER.opendata.paris] Uncaught exception');
+    rollbarHelper.rollbar.handleError(err, '[WORKER.opendata.paris] Uncaught exception');
   }
 
   return logger.info('[WORKER.opendata.paris] Ended');
@@ -61,7 +63,7 @@ function* _update() {
 module.exports = {
   start: () => {
     logger.info('[WORKER.opendata.paris] Starting');
-    /* eslint no-new: 0 */ /* Every monday at 4AM */
-    new CronJob('00 00 04 * * 0', co(_update), null, true, 'Europe/Paris');
+    /* eslint no-new: 0 */ /* Everyday at 4AM */
+    new CronJob('00 00 04 * * *', co.wrap(_update), null, true, 'Europe/Paris');
   }
 };

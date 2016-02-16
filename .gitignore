@@ -1,8 +1,10 @@
 node_modules/
 coverage/
 dump.rdb
+TAGS
 
 *~
 .#*
 
 *.log
+*_flymake.js
