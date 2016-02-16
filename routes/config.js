@@ -10,7 +10,7 @@ function configServer(server) {
 
   server.set('port', config.port);
 
-  require('./search')(server);
+  require('./search.js')(server);
 
   server.use(rollbarHelper.rollbar.errorHandler(config.rollbar.token, rollbarHelper.options));
 }

@@ -17,4 +17,4 @@ function init() {
   });
 }
 
-module.exports = { rollbar, options, init };
+module.exports = { rollbar, init };
