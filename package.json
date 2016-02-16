@@ -12,8 +12,8 @@
     "test": "NODE_ENV=test istanbul cover _mocha --include-all-sources -x \"**/tool/**\" -x \"**/test/**\" -- -b --recursive --require co-mocha"
   },
   "engines": {
-    "node": "5.5.0",
-    "npm": "3.3.12"
+    "node": "5.6.0",
+    "npm": "3.6.0"
   },
   "homepage": "https://bitbucket.org/carparkerapp/carparker-server",
   "repository": {
