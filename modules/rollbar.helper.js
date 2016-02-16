@@ -12,6 +12,9 @@ const options = {
 
 function init() {
   rollbar.init(config.rollbar.token, options);
+  rollbar.handleUncaughtExceptions(config.rollbar.token, {
+    exitOnUncaughtException: true
+  });
 }
 
 module.exports = { rollbar, options, init };
