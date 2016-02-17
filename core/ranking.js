@@ -32,9 +32,9 @@ function updateRanking(carParks) {
 	prices = prices.concat(carPark.prices);
     }
     // Sets price averages
-    for (const duration in _.groupby(prices, duration)) {
-	averages[duration] = _.sum(prices) / prices.length;
-    }
+    _.groupby(prices, duration)).forEach(function(key, values) {
+	averages[key] = _.sum(values) / values.length;
+    });
 
     // Computes ranking
     for (const carPark of carParks) {
