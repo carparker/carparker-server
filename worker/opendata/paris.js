@@ -1,6 +1,5 @@
 'use strict';
 
-const _ = require('lodash');
 const co = require('co');
 const config = require('config');
 const CronJob = require('cron').CronJob;
@@ -9,7 +8,7 @@ const Promise = require('bluebird');
 const logger = require('../../modules').logger;
 const parkUpdater = require('./park_updater');
 const rollbarHelper = require('../../modules').rollbarHelper;
-const ranking = require('../../core/ranking.js')
+const ranking = require('../../core').ranking;
 
 const mapper = require('./mapping/paris.js');
 
@@ -18,8 +17,6 @@ Promise.promisifyAll(superagent.Request.prototype);
 function* _update() {
   logger.info('[WORKER.opendata.paris] Triggered');
 
-  var modified = false;
-    
   const data = yield superagent.get(config.worker.opendata.paris.url)
           .timeout(config.worker.opendata.timeout)
           .send()
@@ -45,10 +42,10 @@ function* _update() {
       parks.push(newpark);
     });
 
-    ranking.updateRanking(parks);
+    const finalParks = ranking.updateRanking(parks);
 
-    logger.info({ parkings: parks }, '[WORKER.opendata.paris] Updating parkings');
-    yield parkUpdater(parks);
+    logger.info({ parkings: finalParks }, '[WORKER.opendata.paris] Updating parkings');
+    yield parkUpdater(finalParks);
   } catch (err) {
     logger.error(err, '[WORKER.opendata.paris] Uncaught exception');
     rollbarHelper.rollbar.handleError(err, '[WORKER.opendata.paris] Uncaught exception');

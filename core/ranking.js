@@ -1,51 +1,52 @@
 'use strict';
 
 const _ = require('lodash');
-const CarPark = require('../models').CarPark;
-const overAveragePercentage = 10;
+
 const rankings = {
-    GREEN: {value: 0, name: "Green"},
-    ORANGE: {value: 1, name: "Orange"},
-    RED: {value: 2, name: "Red"}
-}
+  GREEN: 0,
+  ORANGE: 1,
+  RED: 2
+};
 
 function computeGreenRankingLimit(average) {
-    return average;
+  return average || 0;
 }
 
 function computeOrangeRankingLimit(average) {
-    return average + average * overAveragePercentage / 100;
+  const overAveragePercentage = 10;
+  return average ? average + average * overAveragePercentage / 100 : 0;
 }
 
 function selectTag(greenRankingLimit, orangeRankingLimit, price) {
-    if (price < greenRankingLimit)
-	return rankings.GREEN;
-    if (price < orangeRankingLimit)
-	return rankings.ORANGE;
-    return rankings.RED;
+  if (price < greenRankingLimit) return rankings.GREEN;
+  if (price < orangeRankingLimit) return rankings.ORANGE;
+  return rankings.RED;
 }
 
 function updateRanking(carParks) {
-    const averages = [];
-    const prices = [];
-    for (const carPark of carParks) {
-	prices = prices.concat(carPark.prices);
-    }
-    // Sets price averages
-    _.groupby(prices, duration)).forEach(function(key, values) {
-	averages[key] = _.sum(values) / values.length;
-    });
+  const prices = _.reduce(carParks, (result, carPark) => {
+    Array.prototype.push.apply(result, carPark.prices);
+    return result;
+  }, []);
 
-    // Computes ranking
-    for (const carPark of carParks) {
-	_.map(carPark.prices, price => {
-	    const greenRankingLimit = computeGreenRankingLimit(averages[price.duration]);
-	    const orangeRankingLimit = computeOrangeRankingLimit(averages[price.duration]);
-	    price.ranking = selectTag(greenRankingLimit, orangeRankingLimit, price.price).value;
-	});
-    }
+  const averages = _.reduce(_.groupBy(prices, 'duration'), (result, pricesForDuration, duration) => {
+    result[duration] = _.reduce(pricesForDuration, (sum, price) => sum + price.price, 0) / pricesForDuration.length;
+    return result;
+  }, {});
+
+  for (const carPark of carParks) {
+    /* eslint no-loop-func: 0 */
+    carPark.prices = _.map(carPark.prices, price => {
+      const greenRankingLimit = computeGreenRankingLimit(averages[price.duration]);
+      const orangeRankingLimit = computeOrangeRankingLimit(averages[price.duration]);
+      price.ranking = selectTag(greenRankingLimit, orangeRankingLimit, price.price);
+      return price;
+    });
+  }
+
+  return carParks;
 }
 
 module.exports = {
-    updateRanking
+  updateRanking
 };

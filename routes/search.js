@@ -4,7 +4,6 @@ const co = require('co');
 const httpStatus = require('http-status-codes');
 const Joi = require('joi');
 
-const CarPark = require('../models').CarPark;
 const logger = require('../modules').logger;
 const searchSchema = require('./schema').search;
 const searchParkings = require('../core').search.searchParkings;

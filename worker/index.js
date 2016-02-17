@@ -2,12 +2,15 @@
 
 const config = require('config');
 const logger = require('../modules').logger;
+const rollbarHelper = require('../modules').rollbarHelper;
 
 const invalidator = require('./invalidator');
 const opendata = require('./opendata');
 
 require('../modules').mongooseHelper.connect()
   .then(() => {
+    rollbarHelper.init();
+
     invalidator.start();
     opendata.start();
 
