@@ -14,7 +14,7 @@ const mapper = require('./mapping/paris.js');
 
 Promise.promisifyAll(superagent.Request.prototype);
 
-function* _update() {
+function* update() {
   logger.info('[WORKER.opendata.paris] Triggered');
 
   const data = yield superagent.get(config.worker.opendata.paris.url)
@@ -58,6 +58,8 @@ module.exports = {
   start: () => {
     logger.info('[WORKER.opendata.paris] Starting');
     /* eslint no-new: 0 */ /* Everyday at 4AM */
-    new CronJob('00 00 04 * * *', co.wrap(_update), null, true, 'Europe/Paris');
-  }
+    new CronJob('00 00 04 * * *', co.wrap(update), null, true, 'Europe/Paris');
+  },
+
+  update
 };

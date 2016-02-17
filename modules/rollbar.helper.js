@@ -11,9 +11,12 @@ const options = {
 };
 
 function init() {
-  rollbar.init(config.rollbar.token, options);
-  rollbar.handleUncaughtExceptions(config.rollbar.token, {
-    exitOnUncaughtException: true
+  return new Promise(resolve => {
+    rollbar.init(config.rollbar.token, options);
+    rollbar.handleUncaughtExceptions(config.rollbar.token, {
+      exitOnUncaughtException: true
+    });
+    resolve();
   });
 }
 
