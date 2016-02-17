@@ -31,7 +31,7 @@ function* _update() {
 
     logger.debug({ body }, `[WORKER.opendata.paris] received data`);
     if (!body || !body.nhits || !body.records) {
-      return logger.warn({ data, body }, '[WORKER.opendata.paris] Invalid resilt from data');
+      return logger.warn({ data, body }, '[WORKER.opendata.paris] Invalid result from data');
     }
 
     const parks = [];
