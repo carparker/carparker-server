@@ -3,6 +3,7 @@
 const _ = require('lodash');
 const CarPark = require('../models').CarPark;
 const co = require('co');
+const geolib = require('geolib');
 const logger = require('../modules').logger;
 
 function* searchParkings(latitude, longitude, radius, duration, maxprice) {
@@ -21,18 +22,27 @@ function* searchParkings(latitude, longitude, radius, duration, maxprice) {
     outdated: false
   });
 
-  return sortParkings(yield formatParkings(parkings, duration, maxprice));
+  return sortParkings(yield formatParkings(parkings, latitude, longitude, duration, maxprice));
 }
 
-function* formatParkings(parkings, duration, maxprice) {
+function* formatParkings(parkings, latitude, longitude, duration, maxprice) {
   const res = [];
 
   parkings.forEach(co.wrap(function* (parking) {
     const newpark = _.pick(parking.toObject(), ['name', 'location', 'open_hours', 'last_update']);
     newpark.price = yield findBestPrice(parking.prices, duration, maxprice);
-    if (newpark.price) {
-      res.push(newpark);
+    if (!newpark.price) {
+      return;
     }
+
+    newpark.location.distance = getDistance({
+      latitude,
+      longitude
+    }, {
+      latitude: newpark.location.coordinates[1],
+      longitude: newpark.location.coordinates[0]
+    });
+    res.push(newpark);
   }));
 
   return res;
@@ -47,8 +57,12 @@ function* findBestPrice(prices, duration, maxprice) {
   return _.head(sortedMatchingPrices);
 }
 
+function getDistance(pos1, pos2) {
+  return geolib.getDistance(pos1, pos2, 1, 1);
+}
+
 function sortParkings(parkings) {
-  return _.sortBy(parkings, ['price.ranking', 'price.price']);
+  return _.sortBy(parkings, ['price.ranking', 'price.price', 'location.distance']);
 }
 
 module.exports = {
