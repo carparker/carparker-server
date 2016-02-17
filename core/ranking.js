@@ -25,14 +25,11 @@ function selectTag(greenRankingLimit, orangeRankingLimit, price) {
     return rankings.RED;
 }
 
-function updateRanking(city) {
+function updateRanking(carParks) {
     const averages = [];
     const prices = [];
-    const carParks = yield CarPark.find({
-	'location.city': city
-    });
     for (const carPark of carParks) {
-	prices.append(carPark.prices);
+	prices = prices.concat(carPark.prices);
     }
     // Sets price averages
     for (const duration in _.groupby(prices, duration)) {

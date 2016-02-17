@@ -9,6 +9,7 @@ const Promise = require('bluebird');
 const logger = require('../../modules').logger;
 const parkUpdater = require('./park_updater');
 const rollbarHelper = require('../../modules').rollbarHelper;
+const ranking = require('../../core/ranking.js')
 
 const mapper = require('./mapping/paris.js');
 
@@ -17,6 +18,8 @@ Promise.promisifyAll(superagent.Request.prototype);
 function* _update() {
   logger.info('[WORKER.opendata.paris] Triggered');
 
+  var modified = false;
+    
   const data = yield superagent.get(config.worker.opendata.paris.url)
           .timeout(config.worker.opendata.timeout)
           .send()
@@ -42,13 +45,7 @@ function* _update() {
       parks.push(newpark);
     });
 
-    // TODO: apply ranking on prices
-    for (const park of parks) {
-      _.map(park.prices, price => {
-        price.ranking = 0;
-        return price;
-      });
-    }
+    ranking.updateRanking(parks);
 
     logger.info({ parkings: parks }, '[WORKER.opendata.paris] Updating parkings');
     yield parkUpdater(parks);
