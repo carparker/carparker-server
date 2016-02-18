@@ -63,5 +63,10 @@ function sortParkings(parkings) {
 }
 
 module.exports = {
-  searchParkings
+  searchParkings,
+
+  formatParkings,
+  findBestPrice,
+  getDistance,
+  sortParkings
 };
