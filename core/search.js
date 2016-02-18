@@ -51,7 +51,7 @@ function* findBestPrice(prices, duration, maxprice) {
   const matchingPrices = _.filter(prices, price => price.duration >= duration && price.price <= maxprice);
   const sortedMatchingPrices = _.sortBy(matchingPrices, ['duration', 'price']);
 
-  return _.head(sortedMatchingPrices);
+  return _.head(sortedMatchingPrices) || null;
 }
 
 function getDistance(pos1, pos2) {
