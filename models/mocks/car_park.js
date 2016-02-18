@@ -1,18 +1,21 @@
 'use strict';
 
 const _ = require('lodash');
+const faker = require('faker');
+
+faker.locale = 'fr';
 
 function base(fields) {
   fields = fields || {};
 
   const park = {
-    name: String,
+    name: faker.company.companyName(),
     location: {
-      address: String,
-      postcode: String,
-      city: String,
-      country: String,
-      coordinates: [0, 1]
+      address: faker.address.streetAddress(),
+      postcode: faker.address.zipCode(),
+      city: faker.address.city(),
+      country: faker.address.country(),
+      coordinates: [parseFloat(faker.address.longitude()), parseFloat(faker.address.latitude())]
     },
 
     open_hours: {
@@ -23,10 +26,6 @@ function base(fields) {
     prices: [{
       duration: 15,
       price: 1.5,
-      ranking: 0
-    }, {
-      duration: 30,
-      price: 3,
       ranking: 0
     }],
 

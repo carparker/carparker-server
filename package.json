@@ -45,6 +45,7 @@
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^5.0.1",
     "eslint-config-cp": "^1.1.0",
+    "faker": "^3.0.1",
     "istanbul": "^0.4.2",
     "mocha": "^2.3.4"
   }

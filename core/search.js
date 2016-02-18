@@ -21,14 +21,14 @@ function* searchParkings(latitude, longitude, radius, duration, maxprice) {
     outdated: false
   });
 
-  return sortParkings(yield formatParkings(parkings, latitude, longitude, duration, maxprice));
+  return sortParkings(yield formatParkings(parkings.toObject(), latitude, longitude, duration, maxprice));
 }
 
 function* formatParkings(parkings, latitude, longitude, duration, maxprice) {
   const res = [];
 
   parkings.forEach(co.wrap(function* each(parking) {
-    const newpark = _.pick(parking.toObject(), ['name', 'location', 'open_hours', 'last_update']);
+    const newpark = _.pick(parking, ['name', 'location', 'open_hours', 'last_update']);
     newpark.price = yield findBestPrice(parking.prices, duration, maxprice);
     if (!newpark.price) {
       return;
