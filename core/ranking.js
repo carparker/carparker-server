@@ -48,5 +48,10 @@ function updateRanking(carParks) {
 }
 
 module.exports = {
-  updateRanking
+  updateRanking,
+  rankings,
+
+  selectTag,
+  computeGreenRankingLimit,
+  computeOrangeRankingLimit
 };
