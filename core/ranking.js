@@ -17,7 +17,7 @@ function computeOrangeRankingLimit(average) {
   return average ? average + average * overAveragePercentage / 100 : 0;
 }
 
-function selectTag(greenRankingLimit, orangeRankingLimit, price) {
+function selectTag(price, greenRankingLimit, orangeRankingLimit) {
   if (price < greenRankingLimit) return rankings.GREEN;
   if (price < orangeRankingLimit) return rankings.ORANGE;
   return rankings.RED;
@@ -39,7 +39,7 @@ function updateRanking(carParks) {
     carPark.prices = _.map(carPark.prices, price => {
       const greenRankingLimit = computeGreenRankingLimit(averages[price.duration]);
       const orangeRankingLimit = computeOrangeRankingLimit(averages[price.duration]);
-      price.ranking = selectTag(greenRankingLimit, orangeRankingLimit, price.price);
+      price.ranking = selectTag(price.price, greenRankingLimit, orangeRankingLimit);
       return price;
     });
   }
