@@ -2,6 +2,7 @@
 
 const config = require('config');
 const logger = require('../modules').logger;
+const mongooseHelper = require('../modules').mongooseHelper;
 const rollbarHelper = require('../modules').rollbarHelper;
 
 const invalidator = require('./invalidator');
@@ -13,8 +14,8 @@ function shutdown() {
 }
 
 if (!module.parent) {
-  require('../modules').mongooseHelper.connect()
-    .then(() => rollbarHelper.init())
+  rollbarHelper.init()
+    .then(() => mongooseHelper.connect())
     .then(() => {
       invalidator.start();
       opendata.start();
