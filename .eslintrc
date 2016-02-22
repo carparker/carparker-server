@@ -2,6 +2,7 @@
     "extends": "cp",
     "rules": {
         "require-jsdoc": 0,
-        "max-len": [2, 120, 4]
+        "max-len": [2, 120, 4],
+        "consistent-return": 0
     }
 }

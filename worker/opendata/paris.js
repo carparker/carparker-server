@@ -29,7 +29,7 @@ function* update() {
 
     const body = JSON.parse(data.text);
 
-    logger.debug({ body }, `[WORKER.opendata.paris] received data`);
+    logger.debug({ body }, '[WORKER.opendata.paris] received data');
     if (!body || !body.nhits || !body.records) {
       return logger.warn({ data, body }, '[WORKER.opendata.paris] Invalid result from data');
     }
