@@ -21,7 +21,8 @@ function* searchParkings(latitude, longitude, radius, duration, maxprice) {
     outdated: false
   });
 
-  return sortParkings(yield formatParkings(parkings.toObject(), latitude, longitude, duration, maxprice));
+  return sortParkings(yield formatParkings(_.map(parkings, parking => parking.toObject()),
+                                           latitude, longitude, duration, maxprice));
 }
 
 function* formatParkings(parkings, latitude, longitude, duration, maxprice) {
