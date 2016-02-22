@@ -5,11 +5,104 @@ const chai = require('chai');
 const expect = chai.expect;
 
 const models = require('../../models');
+const CarPark = models.CarPark;
 const carParkMock = models.mocks.CarPark;
 const formattedCarParkMock = models.mocks.FormattedCarPark;
+const mongooseHelper = require('../../modules').mongooseHelper;
 const search = require('../../core').search;
 
 describe('[CORE] Search', () => {
+  describe('#searchParkings', () => {
+    before(function* before() {
+      yield mongooseHelper.connect();
+      yield mongooseHelper.dropDatabase();
+      yield CarPark.collection.ensureIndex({ 'location.coordinates': '2dsphere' });
+    });
+    after(mongooseHelper.disconnect);
+
+    describe('when there is no matching parking', () => {
+      it('should return an empty array', function* it() {
+        const res = yield search.searchParkings(0, 0, 100, 0, 0);
+        expect(res).to.deep.equal([]);
+      });
+    });
+
+    describe('when there are matching parkings', () => {
+      let parkings;
+
+      before(function* before() {
+        parkings = [
+          carParkMock({
+            prices: [{
+              duration: 15,
+              price: 2,
+              ranking: 0
+            }],
+            location: { coordinates: [0, 0] }
+          }), carParkMock({
+            prices: [{
+              duration: 15,
+              price: 3,
+              ranking: 1
+            }],
+            location: { coordinates: [0, 0] }
+          }), carParkMock({
+            prices: [{
+              duration: 15,
+              price: 2,
+              ranking: 0
+            }],
+            location: { coordinates: [48, 2] }
+          }), carParkMock({
+            prices: [{
+              duration: 15,
+              price: 5,
+              ranking: 0
+            }],
+            location: { coordinates: [0, 0] }
+          }), carParkMock({
+            prices: [{
+              // duration: 30,
+              duration: 10,
+              price: 2,
+              ranking: 0
+            }],
+            location: { coordinates: [0, 0] }
+          })];
+
+        yield CarPark.create(parkings);
+      });
+
+      it('should return the sorted valid parkings', function* it() {
+        const expected = [
+          formattedCarParkMock({
+            name: parkings[0].name,
+            location: _.merge(parkings[0].location, { coordinates: [0, 0], distance: 0 }),
+            price: {
+              duration: 15,
+              price: 2,
+              ranking: 0
+            },
+            last_update: parkings[0].last_update
+          }),
+          formattedCarParkMock({
+            name: parkings[1].name,
+            location: _.merge(parkings[1].location, { coordinates: [0, 0], distance: 0 }),
+            price: {
+              duration: 15,
+              price: 3,
+              ranking: 1
+            },
+            last_update: parkings[1].last_update
+          })
+        ];
+
+        const res = yield search.searchParkings(0, 0, 100, 15, 3);
+        expect(res).to.deep.equal(expected);
+      });
+    });
+  });
+
   describe('#formatParkings', () => {
     describe('when there is no matching parking', () => {
       it('should return an empty array', function* it() {
