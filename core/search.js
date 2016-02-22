@@ -2,7 +2,7 @@
 
 const _ = require('lodash');
 const CarPark = require('../models').CarPark;
-const co = require('co');
+const forEach = require('co-foreach');
 const geolib = require('geolib');
 
 function* searchParkings(latitude, longitude, radius, duration, maxprice) {
@@ -28,7 +28,7 @@ function* searchParkings(latitude, longitude, radius, duration, maxprice) {
 function* formatParkings(parkings, latitude, longitude, duration, maxprice) {
   const res = [];
 
-  parkings.forEach(co.wrap(function* each(parking) {
+  return forEach(parkings, function* each(parking) {
     const newpark = _.pick(parking, ['name', 'location', 'open_hours', 'last_update']);
     newpark.price = yield findBestPrice(parking.prices, duration, maxprice);
     if (!newpark.price) {
@@ -43,9 +43,8 @@ function* formatParkings(parkings, latitude, longitude, duration, maxprice) {
       longitude: newpark.location.coordinates[0]
     });
     res.push(newpark);
-  }));
-
-  return res;
+  })
+    .then(() => new Promise(resolve => resolve(res)));
 }
 
 function* findBestPrice(prices, duration, maxprice) {
