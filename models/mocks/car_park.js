@@ -29,7 +29,7 @@ function base(fields) {
       ranking: 0
     }],
 
-    last_update: Date.now(),
+    last_update: new Date(),
     outdated: false
   };
 
