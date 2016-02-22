@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const mongooseHidden = require('mongoose-hidden')();
 const Schema = mongoose.Schema;
 
+const PriceSchema = require('./price').PriceSchema;
+
 const CarParkSchema = new Schema({
   name: { type: String, required: true },
   location: {
@@ -19,11 +21,7 @@ const CarParkSchema = new Schema({
     close: { type: Number, min: 0, max: 1440 }
   },
 
-  prices: [{
-    duration: Number,
-    price: Number,
-    ranking: { type: Number, min: 0, max: 2 }
-  }],
+  prices: [PriceSchema],
 
   last_update: { type: Date, required: true },
   outdated: { type: Boolean, default: false }
