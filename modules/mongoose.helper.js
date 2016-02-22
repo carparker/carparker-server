@@ -4,6 +4,7 @@ const _ = require('lodash');
 const config = require('config');
 const mongoose = require('mongoose');
 const logger = require('./logger');
+const rollbarHelper = require('./rollbar.helper');
 
 mongoose.Promise = global.Promise;
 
@@ -44,10 +45,11 @@ function dropDatabase() {
 }
 
 mongoose.connection.on('open', () => logger.info('Connection established to database'));
-mongoose.connection.on('error', err => logger.error(err, 'Cannot connect to database'));
-mongoose.connection.on('disconnected', () => {
-  logger.warn('Disconnected from database');
+mongoose.connection.on('error', err => {
+  logger.error(err, 'Cannot connect to database');
+  rollbarHelper.rollbar.handleError(err, '[modules.mongoose] Mongoose connection error');
   connect();
 });
+mongoose.connection.on('disconnected', () => logger.info('Disconnected from database'));
 
 module.exports = { mongoose, connect, waitConnection, disconnect, dropDatabase };
