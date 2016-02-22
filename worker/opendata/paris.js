@@ -17,16 +17,16 @@ Promise.promisifyAll(superagent.Request.prototype);
 function* update() {
   logger.info('[WORKER.opendata.paris] Triggered');
 
-  const data = yield superagent.get(config.worker.opendata.paris.url)
-          .timeout(config.worker.opendata.timeout)
-          .send()
-          .endAsync();
-
-  if (!data || !data.text) {
-    return logger.error({ data }, '[WORKER.opendata.paris] Invalid data');
-  }
-
   try {
+    const data = yield superagent.get(config.worker.opendata.paris.url)
+            .timeout(config.worker.opendata.timeout)
+            .send()
+            .endAsync();
+
+    if (!data || !data.text) {
+      return logger.error({ data }, '[WORKER.opendata.paris] Invalid data');
+    }
+
     const body = JSON.parse(data.text);
 
     logger.debug({ body }, `[WORKER.opendata.paris] received data`);
