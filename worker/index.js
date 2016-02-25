@@ -32,5 +32,6 @@ if (!module.parent) {
 }
 
 module.exports = {
+  invalidator,
   opendata
 };

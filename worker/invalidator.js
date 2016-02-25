@@ -7,8 +7,8 @@ const logger = require('../modules').logger;
 const moment = require('moment');
 const rollbarHelper = require('../modules').rollbarHelper;
 
-function *process() {
-  logger.info('[WORKER.opendata.paris] Triggered');
+function *invalidate() {
+  logger.info('[WORKER.invalidator] Triggered');
 
   try {
     const response = yield CarPark.update({
@@ -17,7 +17,7 @@ function *process() {
     }, {
       outdated: true
     });
-    logger.info({ nbUpdated: response.nModified }, '[WORKER.opendata.paris] Updated parkings');
+    logger.info({ nbUpdated: response.nModified }, '[WORKER.invalidator] Updated parkings');
   } catch (err) {
     logger.error(err, '[WORKER.invalidator] Uncaught exception');
     rollbarHelper.rollbar.handleError(err, '[WORKER.invalidator] Uncaught exception');
@@ -30,6 +30,8 @@ module.exports = {
   start: () => {
     logger.info('[WORKER.invalidator] Starting');
     /* eslint no-new: 0 */ /* Everyday at 4.30AM */
-    new CronJob('00 30 04 * * *', co.wrap(process), null, true, 'Europe/Paris');
-  }
+    new CronJob('00 30 04 * * *', co.wrap(invalidate), null, true, 'Europe/Paris');
+  },
+
+  invalidate
 };
