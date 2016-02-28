@@ -15,8 +15,7 @@ function search(req, res) {
   if (validation.error) {
     res.sendStatus(httpStatus.BAD_REQUEST);
   } else {
-    co.wrap(searchParkings)(req.body.position.latitude, req.body.position.longitude, req.body.radius,
-                            req.body.duration.min, req.body.price.max)
+    co.wrap(searchParkings)(req.body)
       .then(parkings => res.status(httpStatus.OK).send({ parkings }))
       .catch(err => {
         logger.error(err, '[SERVER.routes.search] Error');

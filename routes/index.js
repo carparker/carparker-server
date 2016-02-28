@@ -1,5 +1,8 @@
 'use strict';
 
 module.exports = {
-  config: require('./config')
+  config: require('./config.js'),
+
+  /* exported for tests */
+  search: require('./search.js')
 };

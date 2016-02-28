@@ -15,8 +15,7 @@ function base(fields) {
       postcode: faker.address.zipCode(),
       city: faker.address.city(),
       country: faker.address.country(),
-      coordinates: [parseFloat(faker.address.longitude()), parseFloat(faker.address.latitude())],
-      distance: 0
+      coordinates: [parseFloat(faker.address.longitude()), parseFloat(faker.address.latitude())]
     },
 
     open_hours: {
