@@ -27,8 +27,14 @@ const CarParkSchema = new Schema({
   outdated: { type: Boolean, default: false }
 });
 
-// TODO: complete that depending on the db queries
-// CarParkSchema.index({});
+CarParkSchema.index({
+  name: 1,
+  'location.address': 1,
+  'location.postcode': 1,
+  'location.city': 1,
+  'location.country': 1,
+  outdated: 1
+});
 
 CarParkSchema.plugin(mongooseHidden);
 
