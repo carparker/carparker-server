@@ -17,7 +17,7 @@ function formatDate(data) {
   return data;
 }
 
-describe.only('[WORKER] mapper.paris', () => {
+describe('[WORKER] mapper.paris', () => {
   let clock;
 
   before(done => {
