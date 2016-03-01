@@ -1,0 +1,84 @@
+{
+  "parkings": [
+    {
+      "name": "ALMA-GEORGE V",
+      "location": {
+        "address": "6 et 19 avenue George V",
+        "postcode": "75008",
+        "city": "Paris",
+        "country": "France",
+        "coordinates": [2.300988, 48.867002]
+      },
+      "open_hours": {
+        "open": 0,
+        "close": 1440
+      },
+      "prices": [
+        { "duration": 15, "price": 1.1 },
+        { "duration": 30, "price": 2.2 },
+        { "duration": 60, "price": 4.4 },
+        { "duration": 90, "price": 6.6 },
+        { "duration": 120, "price": 8.8 },
+        { "duration": 180, "price": 13.2 },
+        { "duration": 240, "price": 17.6 },
+        { "duration": 420, "price": 30.8 },
+        { "duration": 480, "price": 35.2 },
+        { "duration": 540, "price": 39.6 },
+        { "duration": 600, "price": 39.6 },
+        { "duration": 660, "price": 39.6 },
+        { "duration": 720, "price": 39.6 },
+        { "duration": 1440, "price": 39.6 }
+      ],
+      "last_update": "2015-01-01T00:00:00.000Z",
+      "outdated": false
+    },
+    {
+      "name": "BAC MONTALEMBERT",
+      "location": {
+        "address": "9 rue de Montalembert",
+        "postcode": "75007",
+        "city": "Paris",
+        "country": "France",
+        "coordinates": [2.327068, 48.856562]
+      },
+      "open_hours": {
+        "open": 0,
+        "close": 1440
+      },
+      "prices": [
+        { "duration": 15, "price": 1.1 },
+        { "duration": 30, "price": 2.2 },
+        { "duration": 60, "price": 4.4 },
+        { "duration": 90, "price": 6.6 },
+        { "duration": 120, "price": 8.8 },
+        { "duration": 180, "price": 13.2 },
+        { "duration": 240, "price": 17.6 },
+        { "duration": 420, "price": 30.8 },
+        { "duration": 480, "price": 35.2 },
+        { "duration": 540, "price": 39.6 },
+        { "duration": 600, "price": 39.6 },
+        { "duration": 660, "price": 39.6 },
+        { "duration": 720, "price": 39.6 },
+        { "duration": 1440, "price": 39.6 }
+      ],
+      "last_update": "2015-01-01T00:00:00.000Z",
+      "outdated": false
+    },
+    {
+      "name": "test1",
+      "location": {
+        "address": "420 rue machintruc",
+        "postcode": "75016",
+        "city": "Paris",
+        "country": "France"
+      },
+      "open_hours": {
+        "open": 0,
+        "close": 1440
+      },
+      "prices": [],
+      "last_update": "2015-01-01T00:00:00.000Z",
+      "outdated": false
+    }
+  ]
+}
