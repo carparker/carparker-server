@@ -38,7 +38,6 @@ function* update() {
 
     body.records.forEach((park) => {
       const newpark = mapper(park.fields);
-      logger.info({ parking: newpark }, 'PARKING');
       parks.push(newpark);
     });
 
