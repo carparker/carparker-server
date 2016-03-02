@@ -22,7 +22,7 @@ function start() {
     .catch(err => shutdown(err));
 }
 
-function* shutdown(err) {
+function shutdown(err) {
   if (err) {
     logger.error(err, '[SERVER] Uncaught error');
     rollbarHelper.rollbar.handleError(err, '[SERVER] Uncaught exception');
