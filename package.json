@@ -9,7 +9,7 @@
     "start": "node server.js",
     "debug": "env DEBUG=* node server.js",
     "pretest": "eslint .",
-    "test": "NODE_ENV=test istanbul cover _mocha --include-all-sources -x \"**/tool/**\" -x \"**/test/**\" -- -b --recursive --require co-mocha"
+    "test": "NODE_ENV=test istanbul cover _mocha -- -b --recursive --require co-mocha"
   },
   "engines": {
     "node": "5.6.0",
