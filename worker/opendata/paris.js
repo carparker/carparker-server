@@ -42,6 +42,10 @@ function* update() {
     });
 
     const finalParks = ranking.updateRanking(parks);
+    if (finalParks.length === 0) {
+      rollbarHelper.rollbar.reportMessage('[WORKER.opendata.paris] No parking to update', 'warning', null, () => {});
+      return logger.info({}, '[WORKER.opendata.paris] No parking to update');
+    }
 
     logger.info({ parkings: finalParks }, '[WORKER.opendata.paris] Updating parkings');
     yield parkUpdater(finalParks);
