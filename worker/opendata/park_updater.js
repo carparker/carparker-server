@@ -1,11 +1,10 @@
 'use strict';
 
-const co = require('co');
 const CarPark = require('../../models').CarPark;
 
 // http://stackoverflow.com/a/28081787
 
-function* updateParkings(parks) {
+function updateParkings(parks) {
   return new Promise((resolve, reject) => {
     const bulk = CarPark.collection.initializeUnorderedBulkOp();
 
@@ -21,4 +20,4 @@ function* updateParkings(parks) {
   });
 }
 
-module.exports = co.wrap(updateParkings);
+module.exports = updateParkings;
