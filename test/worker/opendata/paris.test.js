@@ -160,7 +160,7 @@ describe('[WORKER] opendata.paris', () => {
         done();
       });
 
-      it('should do nothing', function* it() {
+      it('should add them in database', function* it() {
         yield parisUpdate();
 
         const parkings = yield CarPark.find({}, { _id: 0 }).lean();
