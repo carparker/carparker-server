@@ -1,17 +1,19 @@
 'use strict';
 
+const bluebird = require('bluebird');
 const chai = require('chai');
 const expect = chai.expect;
 const httpStatus = require('http-status-codes');
 const supertest = require('supertest-as-promised');
+const sinon = require('sinon');
 
-const models = require('../models');
+const models = require('../../models');
 const CarPark = models.CarPark;
 const carParkMock = models.mocks.CarPark;
 const formattedCarParkMock = models.mocks.FormattedCarPark;
-const mongooseHelper = require('../modules').mongooseHelper;
+const mongooseHelper = require('../../modules').mongooseHelper;
 
-const server = require('../server.js');
+const server = require('../../server.js');
 
 describe('[SERVER] API', () => {
   before(function* before() {
@@ -21,7 +23,13 @@ describe('[SERVER] API', () => {
   });
 
   after(function* after() {
-    yield mongooseHelper.disconnect();
+    let exitStatus;
+    sinon.stub(process, 'exit', status => {
+      exitStatus = status;
+    });
+    yield bluebird.promisify(server.shutdown)(null);
+    expect(exitStatus).to.equal(0);
+    process.exit.restore();
   });
 
   describe('POST /search', () => {
