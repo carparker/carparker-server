@@ -13,7 +13,8 @@
     "exit_timeout": "WORKER_EXIT_TIMEOUT"
   },
   "log": {
-    "level": "LOG_LEVEL"
+    "level": "LOG_LEVEL",
+    "requests": "LOG_API_REQUESTS"
   },
   "newrelic": {
     "key": "NEW_RELIC_LICENSE_KEY",

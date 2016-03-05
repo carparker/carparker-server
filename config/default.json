@@ -15,7 +15,8 @@
   },
 
   "log": {
-    "level": "info"
+    "level": "info",
+    "requests": "false"
   },
   "newrelic": {
     "key": "",

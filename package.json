@@ -48,6 +48,7 @@
     "eslint": "^2.2.0",
     "eslint-config-airbnb": "^6.0.2",
     "eslint-config-cp": "^1.1.0",
+    "express-bunyan-logger": "^1.2.0",
     "istanbul": "^0.4.2",
     "mocha": "^2.3.4",
     "nock": "^7.2.2",
