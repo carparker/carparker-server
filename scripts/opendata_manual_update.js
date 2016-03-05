@@ -6,8 +6,8 @@ const mongooseHelper = require('../modules').mongooseHelper;
 const opendata = require('../worker').opendata;
 const rollbarHelper = require('../modules').rollbarHelper;
 
-mongooseHelper.connect()
-  .then(() => rollbarHelper.init())
+rollbarHelper.init()
+  .then(() => mongooseHelper.connect())
   .then(() => {
     logger.info('[SCRIPT.opendata_manual_update] Updating Paris...');
     return co(opendata.paris.update);
