@@ -24,13 +24,6 @@ function connect() {
   });
 }
 
-function waitConnection() {
-  return new Promise(resolve => {
-    if (mongoose.connection.readyState === mongoose.STATES.connected) return resolve();
-    mongoose.connection.once('connected', resolve);
-  });
-}
-
 function disconnect() {
   return new Promise(resolve => {
     if (!_.includes([mongoose.STATES.disconnecting, mongoose.STATES.disconnected], mongoose.connection.readyState)) {
@@ -52,4 +45,4 @@ mongoose.connection.on('error', err => {
 });
 mongoose.connection.on('disconnected', () => logger.info('Disconnected from database'));
 
-module.exports = { mongoose, connect, waitConnection, disconnect, dropDatabase };
+module.exports = { mongoose, connect, disconnect, dropDatabase };
