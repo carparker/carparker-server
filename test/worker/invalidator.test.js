@@ -1,13 +1,17 @@
 'use strict';
 
 const chai = require('chai');
+chai.use(require('chai-as-promised'));
 const expect = chai.expect;
+const co = require('co');
 const moment = require('moment');
+const sinon = require('sinon');
 
 const models = require('../../models');
 const CarPark = models.CarPark;
 const carParkMock = models.mocks.CarPark;
 const mongooseHelper = require('../../modules').mongooseHelper;
+const rollbarHelper = require('../../modules').rollbarHelper;
 const invalidate = require('../../worker').invalidator.invalidate;
 
 describe('[WORKER] Invalidator', () => {
@@ -61,6 +65,31 @@ describe('[WORKER] Invalidator', () => {
       const updatedParking = yield CarPark.findOne({ _id: parking._id });
       expect(updatedParking.toObject()).to.not.deep.equal(parking.toObject());
       expect(updatedParking.outdated).to.equal(true);
+    });
+  });
+
+  describe('when there is an exception', () => {
+    let exceptionHappened = false;
+
+    before(function* before() {
+      sinon.stub(CarPark, 'update', () => {
+        throw new Error('update error');
+      });
+      sinon.stub(rollbarHelper.rollbar, 'handleError', () => {
+        exceptionHappened = true;
+      });
+    });
+
+    after(done => {
+      CarPark.update.restore();
+      rollbarHelper.rollbar.handleError.restore();
+      done();
+    });
+
+    it('should catch it and return', function* it() {
+      /* eslint no-unused-expressions: 0 */
+      yield expect(co.wrap(invalidate)()).to.eventually.be.fulfilled;
+      expect(exceptionHappened).to.equal(true);
     });
   });
 });
