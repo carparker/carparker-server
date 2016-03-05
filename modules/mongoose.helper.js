@@ -16,8 +16,8 @@ function connect() {
       const db = mongoose.connection;
       db.setMaxListeners(0);    // https://github.com/Automattic/mongoose/issues/1992
 
-      db.on('connected', resolve);
-      db.on('error', reject);
+      db.once('connected', resolve);
+      db.once('error', reject);
 
       mongoose.connect(config.db.url);
     }
@@ -34,7 +34,7 @@ function waitConnection() {
 function disconnect() {
   return new Promise(resolve => {
     if (!_.includes([mongoose.STATES.disconnecting, mongoose.STATES.disconnected], mongoose.connection.readyState)) {
-      mongoose.connection.on('disconnected', resolve);
+      mongoose.connection.once('disconnected', resolve);
       mongoose.disconnect();
     }
   });
