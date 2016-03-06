@@ -44,5 +44,15 @@
       "open": 480,
       "close": 1365
     }
-  }
+  },
+  "fixes": [{
+    "condition": {
+      "name": "MAINE BASCH"
+    },
+    "fix": {
+      "location": {
+        "coordinates": [2.3246949, 48.8284622]
+      }
+    }
+  }]
 }

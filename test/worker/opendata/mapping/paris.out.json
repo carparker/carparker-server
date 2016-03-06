@@ -65,6 +65,23 @@
       "outdated": false
     },
     {
+      "name": "MAINE BASCH",
+      "location": {
+        "address": "420 rue machintruc",
+        "postcode": "75016",
+        "city": "Paris",
+        "country": "France",
+        "coordinates": [2.3246949, 48.8284622]
+      },
+      "open_hours": {
+        "open": 0,
+        "close": 1440
+      },
+      "prices": [],
+      "last_update": "2015-01-01T00:00:00.000Z",
+      "outdated": false
+    },
+    {
       "name": "test1",
       "location": {
         "address": "420 rue machintruc",

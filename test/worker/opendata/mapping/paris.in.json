@@ -99,6 +99,12 @@
       "type_de_parc": "Mixte"
     },
     {
+      "nom_du_parc_de_stationnement": "MAINE BASCH",
+      "adresse": "420 rue machintruc",
+      "arrdt": "16",
+      "xy": [0, 0]
+    },
+    {
       "nom_du_parc_de_stationnement": "test1",
       "adresse": "420 rue machintruc",
       "arrdt": "16"

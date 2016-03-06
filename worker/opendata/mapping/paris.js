@@ -4,6 +4,14 @@ const _ = require('lodash');
 
 const fieldMap = require('./paris.json');
 
+function applyFixes(parkData) {
+  for (const fix of fieldMap.fixes) {
+    if (_.isMatch(parkData, fix.condition)) {
+      _.merge(parkData, fix.fix);
+    }
+  }
+}
+
 module.exports = (park) => {
   const arrdt = `0${park.arrdt}`.slice(-2);
 
@@ -38,6 +46,8 @@ module.exports = (park) => {
       });
     }
   }
+
+  applyFixes(parkData);
 
   return parkData;
 };
