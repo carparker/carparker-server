@@ -100,7 +100,7 @@ describe('[CORE] Search', () => {
 
     describe('when it is an invalid message', () => {
       it('should throw an Error', function* it() {
-        expect(co.wrap(search.searchParkings)({})).to.eventually.be.rejectedWith(Error);
+        yield expect(co.wrap(search.searchParkings)({})).to.eventually.be.rejectedWith(Error);
       });
     });
   });
