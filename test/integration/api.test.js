@@ -12,6 +12,7 @@ const CarPark = models.CarPark;
 const carParkMock = models.mocks.CarPark;
 const formattedCarParkMock = models.mocks.FormattedCarPark;
 const mongooseHelper = require('../../modules').mongooseHelper;
+const search = require('../../core').search;
 
 const server = require('../../server.js');
 
@@ -199,6 +200,35 @@ describe('[SERVER] API', () => {
          })
          .expect(httpStatus.OK)
          .then(res => expect(res.body).to.deep.equal({ parkings: [] }))
+        );
+    });
+
+    // XXX: skipping this test, having some issues with stubing generators...
+    describe.skip('when there is an runtime error', () => {
+      before(function* before() {
+        sinon.stub(search, 'searchParkings', function* stub() {
+          throw new Error('error to catch');
+        });
+      });
+
+      after(function* after() {
+        search.searchParkings.restore();
+      });
+
+      it('should return an INTERNAL_SERVER_ERROR response', () => supertest(server.server)
+         .post('/search')
+         .send({
+           address: 'nothing',
+           radius: 42,
+           price: {
+             min: 0,
+             max: 100
+           },
+           duration: {
+             min: 15
+           }
+         })
+         .expect(httpStatus.INTERNAL_SERVER_ERROR)
         );
     });
   });
