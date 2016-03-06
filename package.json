@@ -1,6 +1,6 @@
 {
   "name": "carparker-server",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Server for CarParker app",
   "license": "UNLICENSED",
   "private": true,
