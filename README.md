@@ -1,4 +1,4 @@
-# CarParker server [![Build Status](https://travis-ci.org/carparker/carparker-server.svg?branch=master)](https://travis-ci.org/carparker/carparker-server)
+# CarParker server [![Build Status](https://travis-ci.org/carparker/carparker-server.svg?branch=master)](https://travis-ci.org/carparker/carparker-server)[![codecov.io](https://codecov.io/github/carparker/carparker-server/coverage.svg?branch=master)](https://codecov.io/github/carparker/carparker-server?branch=master)
 
 ## Description
 
