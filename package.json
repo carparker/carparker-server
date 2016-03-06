@@ -9,7 +9,8 @@
     "start": "node server.js",
     "debug": "env DEBUG=* node server.js",
     "pretest": "eslint .",
-    "test": "NODE_ENV=test istanbul cover _mocha -- -b --recursive --require co-mocha"
+    "test": "NODE_ENV=test istanbul cover _mocha -- -b --recursive --require co-mocha",
+    "test-ci": "NODE_ENV=test istanbul cover _mocha -- -b --recursive --require co-mocha -R spec && codecov"
   },
   "engines": {
     "node": "5.6.0",
@@ -46,6 +47,7 @@
     "chai": "3.5.0",
     "chai-as-promised": "5.2.0",
     "co-mocha": "1.1.2",
+    "codecov": "^1.0.1",
     "eslint": "2.2.0",
     "eslint-config-airbnb": "6.1.0",
     "eslint-config-cp": "1.1.0",
