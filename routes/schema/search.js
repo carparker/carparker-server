@@ -7,7 +7,7 @@ const searchBodySchema = Joi.object().keys({
     latitude: Joi.number().required(),
     longitude: Joi.number().required()
   }),
-  address: Joi.string(),
+  address: Joi.string().allow(''),
   radius: Joi.number().positive().required(),
   price: Joi.object().required().keys({
     min: Joi.number().min(0).required(),

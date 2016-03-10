@@ -6,10 +6,10 @@ const forEach = require('co-foreach');
 const logger = require('../modules').logger;
 
 function* searchParkings(request) {
-  if (request.position) {
+  if (_.isObject(request.position)) {
     return yield searchParkingsGeo(request.position.latitude, request.position.longitude, request.radius,
                                    request.duration.min, request.price.max);
-  } else if (request.address) {
+  } else if (_.isString(request.address)) {
     return yield searchParkingsText(request.address, request.duration.min, request.price.max);
   }
 

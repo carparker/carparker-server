@@ -188,6 +188,46 @@ describe('[SERVER] API', () => {
       it('should return an OK response', () => supertest(server.server)
          .post('/search')
          .send({
+           address: '',
+           radius: 42,
+           price: {
+             min: 0,
+             max: 100
+           },
+           duration: {
+             min: 15
+           }
+         })
+         .expect(httpStatus.OK)
+         .then(res => expect(res.body).to.deep.equal({
+           parkings: [
+             formattedCarParkMock({
+               name: parkings[0].name,
+               location: parkings[0].location,
+               price: {
+                 duration: 15,
+                 price: 2,
+                 ranking: 0
+               },
+               last_update: parkings[0].last_update.toISOString()
+             }),
+             formattedCarParkMock({
+               name: parkings[1].name,
+               location: parkings[1].location,
+               price: {
+                 duration: 15,
+                 price: 2,
+                 ranking: 0
+               },
+               last_update: parkings[1].last_update.toISOString()
+             })
+           ]
+         }))
+        );
+
+      it('should return an OK response', () => supertest(server.server)
+         .post('/search')
+         .send({
            address: 'nothing',
            radius: 42,
            price: {
