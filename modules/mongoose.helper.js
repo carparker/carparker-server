@@ -12,7 +12,7 @@ function connect() {
   return new Promise((resolve, reject) => {
     if (mongoose.connection.readyState === mongoose.STATES.connected) return resolve();
 
-    if (!_.includes([mongoose.STATES.connected, mongoose.STATES.connecting], mongoose.connection.readyState)) {
+    if (!_.includes([mongoose.STATES.connecting, mongoose.STATES.connected], mongoose.connection.readyState)) {
       const db = mongoose.connection;
       db.setMaxListeners(0);    // https://github.com/Automattic/mongoose/issues/1992
 

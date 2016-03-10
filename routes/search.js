@@ -16,7 +16,10 @@ function search(req, res) {
     res.sendStatus(httpStatus.BAD_REQUEST);
   } else {
     co.wrap(searchParkings)(req.body)
-      .then(parkings => res.status(httpStatus.OK).send({ parkings }))
+      .then(parkings => {
+        logger.debug({ req: req.body, parkings }, '[SERVER.routes.search] Sending response');
+        res.status(httpStatus.OK).send({ parkings });
+      })
       .catch(err => {
         logger.error(err, '[SERVER.routes.search] Error');
         res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err);
