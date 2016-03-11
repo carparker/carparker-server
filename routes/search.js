@@ -5,6 +5,7 @@ const httpStatus = require('http-status-codes');
 const Joi = require('joi');
 
 const logger = require('../modules').logger;
+const rollbarHelper = require('../modules').rollbarHelper;
 const searchSchema = require('./schema').search;
 const searchParkings = require('../core').search.searchParkings;
 
@@ -22,6 +23,7 @@ function search(req, res) {
       })
       .catch(err => {
         logger.error(err, '[SERVER.routes.search] Error');
+        rollbarHelper.rollbar.handleError(err, '[SERVER.routes.search] Internal server error');
         res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err);
       });
   }
