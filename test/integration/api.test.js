@@ -12,7 +12,6 @@ const CarPark = models.CarPark;
 const carParkMock = models.mocks.CarPark;
 const formattedCarParkMock = models.mocks.FormattedCarPark;
 const mongooseHelper = require('../../modules').mongooseHelper;
-const search = require('../../core').search;
 
 const server = require('../../server.js');
 
@@ -243,16 +242,13 @@ describe('[SERVER] API', () => {
         );
     });
 
-    // XXX: skipping this test, having some issues with stubing generators...
-    describe.skip('when there is an runtime error', () => {
+    describe('when there is an runtime error', () => {
       before(function* before() {
-        sinon.stub(search, 'searchParkings', function* stub() {
-          throw new Error('error to catch');
-        });
+        sinon.stub(CarPark, 'find', () => Promise.reject('error'));
       });
 
       after(function* after() {
-        search.searchParkings.restore();
+        CarPark.find.restore();
       });
 
       it('should return an INTERNAL_SERVER_ERROR response', () => supertest(server.server)
