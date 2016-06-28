@@ -1,7 +1,11 @@
 'use strict';
 
+const logger = require('./logger');
+const mongooseHelper = require('./mongoose.helper');
+const rollbarHelper = require('./rollbar.helper');
+
 module.exports = {
-  logger: require('./logger.js'),
-  mongooseHelper: require('./mongoose.helper.js'),
-  rollbarHelper: require('./rollbar.helper.js')
+  logger,
+  mongooseHelper,
+  rollbarHelper
 };

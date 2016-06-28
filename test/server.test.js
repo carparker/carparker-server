@@ -32,7 +32,7 @@ describe('[SERVER]', () => {
       yield supertest(`http://localhost:${config.port}`)
         .options('/search')
         .send()
-        .expect(httpStatus.OK);
+        .expect(httpStatus.NO_CONTENT);
 
       yield bluebird.promisify(server.shutdown)(null);
 

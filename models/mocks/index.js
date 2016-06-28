@@ -1,6 +1,9 @@
 'use strict';
 
+const CarPark = require('./car_park');
+const FormattedCarPark = require('./formatted_car_park');
+
 module.exports = {
-  CarPark: require('./car_park.js'),
-  FormattedCarPark: require('./formatted_car_park.js')
+  CarPark,
+  FormattedCarPark
 };

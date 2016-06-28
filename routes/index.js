@@ -1,8 +1,11 @@
 'use strict';
 
+const expressConfig = require('./config');
+const searchRoutes = require('./search');
+
 module.exports = {
-  config: require('./config.js'),
+  config: expressConfig,
 
   /* exported for tests */
-  search: require('./search.js')
+  search: searchRoutes
 };

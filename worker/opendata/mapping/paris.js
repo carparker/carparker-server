@@ -38,14 +38,14 @@ module.exports = (park) => {
 
   parkData.open_hours = fieldMap.opening[park.horaires_ouvertures_pour_les_usagers_non_abonnes] || parkData.open_hours;
 
-  for (const price in fieldMap.price) {
-    if (park[price]) {
+  _.forEach(fieldMap.price, (value, key) => {
+    if (park[key]) {
       parkData.prices.push({
-        duration: fieldMap.price[price],
-        price: parseFloat(park[price].slice(0, -2).replace(',', '.'))
+        duration: value,
+        price: parseFloat(park[key].slice(0, -2).replace(',', '.'))
       });
     }
-  }
+  });
 
   applyFixes(parkData);
 

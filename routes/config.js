@@ -5,6 +5,8 @@ const config = require('config');
 const expressBunyanLogger = require('express-bunyan-logger');
 const rollbarHelper = require('../modules').rollbarHelper;
 
+const searchRoutes = require('./search');
+
 function configServer(server) {
   server.use(bodyParser.urlencoded({ extended: true }));
   server.use(bodyParser.json());
@@ -14,7 +16,7 @@ function configServer(server) {
   }
 
   /* setup routes */
-  require('./search.js')(server);
+  searchRoutes(server);
 
   server.use(rollbarHelper.rollbar.errorHandler(config.rollbar.token, rollbarHelper.options));
 }

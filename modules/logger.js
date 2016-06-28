@@ -2,6 +2,7 @@
 
 const bunyan = require('bunyan');
 const config = require('config');
+const PrettyStream = require('bunyan-prettystream');
 
 const stream = {
   level: config.log.level,
@@ -9,7 +10,6 @@ const stream = {
 };
 
 if (process.env.NODE_ENV === 'test') {
-  const PrettyStream = require('bunyan-prettystream');
   const prettyStdOut = new PrettyStream();
 
   prettyStdOut.pipe(process.stdout);
