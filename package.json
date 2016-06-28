@@ -13,8 +13,7 @@
     "test-ci": "NODE_ENV=test istanbul cover _mocha -- -b --recursive --require co-mocha -R spec && codecov"
   },
   "engines": {
-    "node": "5.6.0",
-    "npm": "3.6.0"
+    "node": "6.2.2"
   },
   "homepage": "https://bitbucket.org/carparkerapp/carparker-server",
   "repository": {
